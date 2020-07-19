@@ -108,6 +108,14 @@ permalink: /
                     {% if site.tumblr_username %}
                     <li><a class="fa fa-2x fa-tumblr" href="https://{{ site.tumblr_username }}.tumblr.com/"><span class="description">Tumblr</span></a></li>
                     {% endif %}
+                    
+                    {% if site.goodreads_username %}
+                    <li><a class="fa fa-2x fa-goodreads" href="https://www.goodreads.com/{{ site.goodreads_username }}"><span class="description">Goodreads</span></a></li>
+                    {% endif %}
+                    
+                    {% if site.youtube_username %}
+                    <li><a class="fa fa-2x fa-youtube" href="https://www.youtube.com/{{ site.youtube_username }}"><span class="description">YouTube</span></a></li>
+                    {% endif %}
 
                     {% if site.weibo_username %}
                     <li><a class="fa fa-2x fa-weibo" href="https://weibo.com/{{ site.weibo_username }}"><span class="description">微博</span></a></li>
