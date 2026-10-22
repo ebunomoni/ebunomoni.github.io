@@ -2,9 +2,12 @@
 permalink: /
 ---
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <!-- The sha256 below is the hash of the inline PostHog script. If that script changes, recompute it or analytics will be blocked. -->
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-bNke8dvZk2YNK+p4oUeFuyp/WlUQz7++0hc499ftuZo=' https://us-assets.i.posthog.com; connect-src 'self' https://us.i.posthog.com https://us-assets.i.posthog.com; img-src 'self' data: https://avatars.githubusercontent.com; style-src 'self' 'unsafe-inline'; font-src 'self'; worker-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+        <meta name="referrer" content="strict-origin-when-cross-origin">
         <script>
             !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
             posthog.init('phc_qeZHYo2ccs8RWmyYmtnD5zvByLQeHtohDXXAt2BDtEcW', {
@@ -21,17 +24,16 @@ permalink: /
         <link rel="shortcut icon" href="{{ site.favicon_img_path }}" />
         {% endif %}
         <link rel="stylesheet" href="{{ "css/front.css" | prepend: site.baseurl }}">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ "css/font-awesome.min.css" | prepend: site.baseurl }}">
     </head>
     <body>
         <div class="content">
             {% if site.front_img %}
-            <img src="{{ site.front_img_path }}" id="fullscreen">
+            <img src="{{ site.front_img_path }}" id="fullscreen" alt="">
             {% endif %}
 
             {% if site.avatar %}
-                <img src="{{ site.avatar_img_path }}" id="avatar">
+                <img src="{{ site.avatar_img_path }}" id="avatar" alt="{{ site.name }}">
             {% endif %}
 
             <h1>{{ site.name }}</h1>
@@ -79,12 +81,12 @@ permalink: /
                     <li><a class="fa fa-2x fa-instagram" href="https://instagram.com/{{ site.instagram_username }}"><span class="description">Instagram</span></a></li>
                     {% endif %}
 
-                    {% if site.flickr_usernmae %}
+                    {% if site.flickr_username %}
                     <li><a class="fa fa-2x fa-flickr" href="https://flickr.com/photos/{{ site.flickr_username }}"><span class="description">Flickr</span></a></li>
                     {% endif %}
 
                     {% if site.steam_username %}
-                    <li><a class="fa fa-2x fa-steam" href="http://steamcommunity.com/id/{{ site.steam_username }}"><span class="description">Steam</span></a></li>
+                    <li><a class="fa fa-2x fa-steam" href="https://steamcommunity.com/id/{{ site.steam_username }}"><span class="description">Steam</span></a></li>
                     {% endif %}
 
                     {% if site.soundcloud_username %}
@@ -92,7 +94,7 @@ permalink: /
                     {% endif %}
 
                     {% if site.lastfm_username %}
-                    <li><a class="fa fa-2x fa-lastfm" href="http://www.last.fm/user/{{ site.lastfm_username }}"><span class="description">Last.fm</span></a></li>
+                    <li><a class="fa fa-2x fa-lastfm" href="https://www.last.fm/user/{{ site.lastfm_username }}"><span class="description">Last.fm</span></a></li>
                     {% endif %}
 
                     {% if site.stack_of_username %}

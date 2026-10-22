@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../fonts/open-sans-latin-400-normal.woff2) format('woff2'), url(../fonts/open-sans-latin-400-normal.woff) format('woff');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../fonts/open-sans-latin-700-normal.woff2) format('woff2'), url(../fonts/open-sans-latin-700-normal.woff) format('woff');
+}
 body {
     font-family: 'Open Sans',Helvetica,Arial,sans-serif;
     background-color: rgba(0, 0, 0, 0.9);
@@ -71,8 +85,14 @@ a {
     padding: 15px;
     text-decoration: none;
 }
+/* Visually hidden but still read by screen readers */
 .description {
-    display: none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
 }
 
 @media (max-width: 450px) {
@@ -113,6 +133,12 @@ a:hover {
     text-decoration: none;
 }
 .description {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
     display: inline-block;
     color: white;
     font-family: Arial;
