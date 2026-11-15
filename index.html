@@ -6,7 +6,7 @@ permalink: /
     <head>
         <meta charset="utf-8">
         <!-- The sha256 below is the hash of the inline PostHog script. If that script changes, recompute it or analytics will be blocked. -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-TrnE526PF2udigMRsKqIGh1Z57YTxzklkMPSZW7ve7A=' https://us-assets.i.posthog.com; connect-src 'self' https://us.i.posthog.com https://us-assets.i.posthog.com; img-src 'self' data: https://avatars.githubusercontent.com; style-src 'self' 'unsafe-inline'; font-src 'self'; worker-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-TrnE526PF2udigMRsKqIGh1Z57YTxzklkMPSZW7ve7A=' https://us-assets.i.posthog.com https://us.posthog.com; connect-src 'self' https://us.i.posthog.com https://us-assets.i.posthog.com https://us.posthog.com; img-src 'self' data: https://avatars.githubusercontent.com https://us.posthog.com; style-src 'self' 'unsafe-inline' https://us-assets.i.posthog.com https://us.posthog.com; font-src 'self'; worker-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests">
         <meta name="referrer" content="strict-origin-when-cross-origin">
         <script>
             !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -25,116 +25,55 @@ permalink: /
         <link rel="shortcut icon" href="{{ site.favicon_img_path }}" />
         {% endif %}
         <link rel="stylesheet" href="{{ "css/front.css" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "css/font-awesome.min.css" | prepend: site.baseurl }}">
     </head>
     <body>
-        <div class="content">
-            {% if site.front_img %}
-            <img src="{{ site.front_img_path }}" id="fullscreen" alt="">
-            {% endif %}
-
+        {% if site.front_img %}
+        <div class="backdrop">
+            <picture>
+                {% if site.front_img_webp_path %}
+                <source srcset="{{ site.front_img_webp_path }}" type="image/webp">
+                {% endif %}
+                <img src="{{ site.front_img_path }}" alt="">
+            </picture>
+        </div>
+        {% endif %}
+        <main>
             {% if site.avatar %}
-                <img src="{{ site.avatar_img_path }}" id="avatar" alt="{{ site.name }}">
+            <img class="avatar" src="{{ site.avatar_img_path }}" alt="{{ site.name }}" width="148" height="148">
             {% endif %}
 
             <h1>{{ site.name }}</h1>
-            <h3>{{ site.description }}</h3>
+            <p class="headline">{{ site.description }}</p>
 
-                <ul>
-
-                    {% if site.linkedin_username %}
-                    <li><a class="fa fa-2x fa-linkedin" href="https://linkedin.com/in/{{ site.linkedin_username }}"><span class="description">LinkedIn</span></a></li>
-                    {% endif %}
-                    
-                    {% if site.medium_username %}
-                    <li><a class="fa fa-2x fa-medium" href="https://medium.com/@{{ site.medium_username }}"><span class="description">Medium</span></a></li>
-                    {% endif %}
-                    
-                    {% if site.twitter_username %}
-                    <li><a class="fa fa-2x fa-twitter" href="https://twitter.com/{{ site.twitter_username }}"><span class="description">Twitter</span></a></li>
-                    {% endif %}
-                    
-                    {% if site.github_username %}
-                    <li><a class="fa fa-2x fa-github" href="https://github.com/{{ site.github_username }}"><span class="description">GitHub</span></a></li>
-                    {% endif %}
-
-                    {% if site.codepen_username %}
-                    <li><a class="fa fa-2x fa-codepen" href="https://codepen.io/{{ site.codepen_username }}"><span class="description">CodePen</span></a></li>
-                    {% endif %}
-
-                    {% if site.facebook_username %}
-                    <li><a class="fa fa-2x fa-facebook" href="https://facebook.com/{{ site.facebook_username }}"><span class="description">Facebook</span></a></li>
-                    {% endif %}
-
-                    {% if site.vk_username %}
-                    <li><a class="fa fa-2x fa-vk" href="https://vk.com/{{ site.vk_username }}"><span class="description">ВКонтакте</span></a></li>
-                    {% endif %}
-
-                    {% if site.google_plus_username %}
-                    <li><a class="fa fa-2x fa-google-plus" href="https://plus.google.com/+{{ site.google_plus_username }}"><span class="description">Google +</span></a></li>
-                    {% endif %}
-
-                    {% if site.vine_username %}
-                    <li><a class="fa fa-2x fa-vine" href="https://vine.co/{{ site.vine_username }}"><span class="description">Vine</span></a></li>
-                    {% endif %}
-
-                    {% if site.instagram_username %}
-                    <li><a class="fa fa-2x fa-instagram" href="https://instagram.com/{{ site.instagram_username }}"><span class="description">Instagram</span></a></li>
-                    {% endif %}
-
-                    {% if site.flickr_username %}
-                    <li><a class="fa fa-2x fa-flickr" href="https://flickr.com/photos/{{ site.flickr_username }}"><span class="description">Flickr</span></a></li>
-                    {% endif %}
-
-                    {% if site.steam_username %}
-                    <li><a class="fa fa-2x fa-steam" href="https://steamcommunity.com/id/{{ site.steam_username }}"><span class="description">Steam</span></a></li>
-                    {% endif %}
-
-                    {% if site.soundcloud_username %}
-                    <li><a class="fa fa-2x fa-soundcloud" href="https://soundcloud.com/{{ site.soundcloud_username }}"><span class="description">Soundcloud</span></a></li>
-                    {% endif %}
-
-                    {% if site.lastfm_username %}
-                    <li><a class="fa fa-2x fa-lastfm" href="https://www.last.fm/user/{{ site.lastfm_username }}"><span class="description">Last.fm</span></a></li>
-                    {% endif %}
-
-                    {% if site.stack_of_username %}
-                    <li><a class="fa fa-2x fa-stack-overflow" href="https://stackoverflow.com/users/{{ site.stack_of_username }}"><span class="description">Stack OF</span></a></li>
-                    {% endif %}
-
-                    {% if site.reddit_username %}
-                    <li><a class="fa fa-2x fa-reddit" href="https://reddit.com/user/{{ site.reddit_username }}"><span class="description">Reddit</span></a></li>
-                    {% endif %}
-
-                    {% if site.tumblr_username %}
-                    <li><a class="fa fa-2x fa-tumblr" href="https://{{ site.tumblr_username }}.tumblr.com/"><span class="description">Tumblr</span></a></li>
-                    {% endif %}
-                    
-                    {% if site.goodreads_username %}
-                    <li><a class="fab fa-2x fa-goodreads" href="https://www.goodreads.com/{{ site.goodreads_username }}"><span class="description">Goodreads</span></a></li>
-                    {% endif %}
-                    
-                    {% if site.youtube_username %}
-                    <li><a class="fa fa-2x fa-youtube" href="https://www.youtube.com/{{ site.youtube_username }}"><span class="description">YouTube</span></a></li>
-                    {% endif %}
-
-                    {% if site.weibo_username %}
-                    <li><a class="fa fa-2x fa-weibo" href="https://weibo.com/{{ site.weibo_username }}"><span class="description">微博</span></a></li>
-                    {% endif %}
-
-                    {% if site.blog_url %}
-                    <li><a class="fa fa-2x fa-tags" href="{{ site.baseurl }}{{ site.blog_url }}"><span class="description">Blog</span></a></li>
-                    {% endif %}
-
-                    {% if site.email %}
-                    <li><a class="fa fa-2x fa-envelope" href="mailto:{{ site.email }}"><span class="description">Email</span></a></li>
-                    {% endif %}
-
-                    {% if site.public_key_url %}
-                    <li><a class="fa fa-2x fa-key" href="{{ site.public_key_url }}"><span class="description">PGP Key</span></a></li>
-                    {% endif %}
-                </ul>
-        </div>
-
+            <ul class="links">
+                {% if site.linkedin_username %}
+                <li><a href="https://linkedin.com/in/{{ site.linkedin_username }}">{% include icons/linkedin.svg %}<span class="label">LinkedIn</span></a></li>
+                {% endif %}
+                {% if site.medium_username %}
+                <li><a href="https://medium.com/@{{ site.medium_username }}">{% include icons/medium.svg %}<span class="label">Medium</span></a></li>
+                {% endif %}
+                {% if site.github_username %}
+                <li><a href="https://github.com/{{ site.github_username }}">{% include icons/github.svg %}<span class="label">GitHub</span></a></li>
+                {% endif %}
+                {% if site.instagram_username %}
+                <li><a href="https://instagram.com/{{ site.instagram_username }}">{% include icons/instagram.svg %}<span class="label">Instagram</span></a></li>
+                {% endif %}
+                {% if site.youtube_username %}
+                <li><a href="https://www.youtube.com/{{ site.youtube_username }}">{% include icons/youtube.svg %}<span class="label">YouTube</span></a></li>
+                {% endif %}
+                {% if site.goodreads_username %}
+                <li><a href="https://www.goodreads.com/{{ site.goodreads_username }}">{% include icons/goodreads.svg %}<span class="label">Goodreads</span></a></li>
+                {% endif %}
+                {% if site.reddit_username %}
+                <li><a href="https://reddit.com/user/{{ site.reddit_username }}">{% include icons/reddit.svg %}<span class="label">Reddit</span></a></li>
+                {% endif %}
+                {% if site.blog_url %}
+                <li><a href="{{ site.baseurl }}{{ site.blog_url }}">{% include icons/blog.svg %}<span class="label">Blog</span></a></li>
+                {% endif %}
+                {% if site.email %}
+                <li><a href="mailto:{{ site.email }}">{% include icons/email.svg %}<span class="label">Email</span></a></li>
+                {% endif %}
+            </ul>
+        </main>
     </body>
 </html>
